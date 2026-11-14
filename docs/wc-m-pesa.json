@@ -1,0 +1,249 @@
+{
+  "info": {
+    "_postman_id": "e0dd7fd2-7d2b-44df-8f27-0e3d2a7f5b4a",
+    "name": "WC M-Pesa Payment Tests",
+    "description": "Postman collection for testing WC M-Pesa payment endpoints. Use a bearer token from the WC UAC auth API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "siteDomain",
+      "value": "your-site.com"
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "orderId",
+      "value": "456"
+    },
+    {
+      "key": "orderKey",
+      "value": "wc_order_test"
+    },
+    {
+      "key": "phone",
+      "value": "0712345678"
+    },
+    {
+      "key": "callbackSecret",
+      "value": "replace-with-wc_mpesa_callback_secret"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Mobile App",
+      "item": [
+        {
+          "name": "Get Mobile Endpoints",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://{{siteDomain}}/wp-json/wc-mpesa/v1/mobile/endpoints",
+              "protocol": "https",
+              "host": [
+                "{{siteDomain}}"
+              ],
+              "path": [
+                "wp-json",
+                "wc-mpesa",
+                "v1",
+                "mobile",
+                "endpoints"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Initiate Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": {{orderId}},\n  \"phone\": \"{{phone}}\"\n}"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://{{siteDomain}}/wp-json/wc-mpesa/v1/payments/initiate",
+              "protocol": "https",
+              "host": [
+                "{{siteDomain}}"
+              ],
+              "path": [
+                "wp-json",
+                "wc-mpesa",
+                "v1",
+                "payments",
+                "initiate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Payment Status",
+          "request": {
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://{{siteDomain}}/wp-json/wc-mpesa/v1/payments/{{orderId}}/status",
+              "protocol": "https",
+              "host": [
+                "{{siteDomain}}"
+              ],
+              "path": [
+                "wp-json",
+                "wc-mpesa",
+                "v1",
+                "payments",
+                "{{orderId}}",
+                "status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Query Payment Status",
+          "request": {
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://{{siteDomain}}/wp-json/wc-mpesa/v1/payments/{{orderId}}/query",
+              "protocol": "https",
+              "host": [
+                "{{siteDomain}}"
+              ],
+              "path": [
+                "wp-json",
+                "wc-mpesa",
+                "v1",
+                "payments",
+                "{{orderId}}",
+                "query"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public",
+      "item": [
+        {
+          "name": "Poll Order Status",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://{{siteDomain}}/wp-json/wc-mpesa/v1/status/{{orderId}}?key={{orderKey}}",
+              "protocol": "https",
+              "host": [
+                "{{siteDomain}}"
+              ],
+              "path": [
+                "wp-json",
+                "wc-mpesa",
+                "v1",
+                "status",
+                "{{orderId}}"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{orderKey}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Callback",
+      "item": [
+        {
+          "name": "Daraja Callback",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://{{siteDomain}}/wp-json/wc-mpesa/v1/callback?secret={{callbackSecret}}",
+              "protocol": "https",
+              "host": [
+                "{{siteDomain}}"
+              ],
+              "path": [
+                "wp-json",
+                "wc-mpesa",
+                "v1",
+                "callback"
+              ],
+              "query": [
+                {
+                  "key": "secret",
+                  "value": "{{callbackSecret}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Body\": {\n    \"stkCallback\": {\n      \"MerchantRequestID\": \"12345-67890\",\n      \"CheckoutRequestID\": \"ws_CO_27012345678\",\n      \"ResultCode\": 0,\n      \"ResultDesc\": \"The service request is processed successfully.\",\n      \"CallbackMetadata\": {\n        \"Item\": [\n          {\n            \"Name\": \"Amount\",\n            \"Value\": 100\n          },\n          {\n            \"Name\": \"MpesaReceiptNumber\",\n            \"Value\": \"QGJ1K2L3M4\"\n          },\n          {\n            \"Name\": \"TransactionDate\",\n            \"Value\": 20260827112233\n          },\n          {\n            \"Name\": \"PhoneNumber\",\n            \"Value\": 254712345678\n          }\n        ]\n      }\n    }\n  }\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

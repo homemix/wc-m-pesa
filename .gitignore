@@ -1,0 +1,31 @@
+# Local IDE and editor files.
+.idea/
+.vscode/
+*.iml
+*.swp
+*~
+
+# Local environment and credentials.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.log
+
+# Local development dependencies and tools.
+/vendor/
+/composer.phar
+
+# Generated test and build output.
+/.phpunit.result.cache
+/wc_test_output.txt
+/coverage/
+/build/
+/dist/
+
+# OS metadata.
+.DS_Store
+Thumbs.db

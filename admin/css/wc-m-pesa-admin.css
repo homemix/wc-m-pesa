@@ -1,0 +1,12 @@
+/**
+ * WooCommerce M-Pesa Gateway — Admin Styles
+ */
+
+/* Settings section: highlight the environment warning */
+.wc-mpesa-sandbox-notice {
+    background: #fff8e1;
+    border-left: 4px solid #ffb300;
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: 13px;
+}
