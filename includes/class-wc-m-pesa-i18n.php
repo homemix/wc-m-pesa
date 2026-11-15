@@ -17,7 +17,7 @@ class WC_MPesa_i18n {
 	 */
 	public function load_plugin_textdomain(): void {
 		load_plugin_textdomain(
-			'wc-m-pesa',
+			'm-pesa-payment-gateway',
 			false,
 			WC_MPESA_PLUGIN_DIR . 'languages/'
 		);

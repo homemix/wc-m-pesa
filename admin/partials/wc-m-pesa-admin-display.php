@@ -11,14 +11,14 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <div class="wrap wc-mpesa-admin-wrap">
-	<h2><?php esc_html_e( 'WooCommerce M-Pesa', 'wc-m-pesa' ); ?></h2>
+	<h2><?php esc_html_e( 'WooCommerce M-Pesa', 'm-pesa-payment-gateway' ); ?></h2>
 	<p>
 		<?php
 		printf(
 			/* translators: %s: WooCommerce settings URL */
-			esc_html__( 'Configure your M-Pesa gateway settings under %s.', 'wc-m-pesa' ),
+			esc_html__( 'Configure your M-Pesa gateway settings under %s.', 'm-pesa-payment-gateway' ),
 			'<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=wc_mpesa' ) ) . '">'
-			. esc_html__( 'WooCommerce > Settings > Payments > M-Pesa', 'wc-m-pesa' )
+			. esc_html__( 'WooCommerce > Settings > Payments > M-Pesa', 'm-pesa-payment-gateway' )
 			. '</a>'
 		);
 		?>

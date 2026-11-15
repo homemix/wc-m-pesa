@@ -67,12 +67,12 @@ class WC_MPesa_REST_API {
 		$password = (string) $request->get_param( 'password' );
 
 		if ( '' === $phone || '' === $password ) {
-			return $this->error_response( 'invalid_credentials', __( 'Invalid login credentials.', 'wc-m-pesa' ), 400 );
+			return $this->error_response( 'invalid_credentials', __( 'Invalid login credentials.', 'm-pesa-payment-gateway' ), 400 );
 		}
 
 		$user = $this->get_user_by_phone( $phone );
 		if ( ! $user instanceof \WP_User || ! wp_check_password( $password, $user->user_pass, $user->ID ) ) {
-			return $this->error_response( 'invalid_credentials', __( 'Invalid login credentials.', 'wc-m-pesa' ), 401 );
+			return $this->error_response( 'invalid_credentials', __( 'Invalid login credentials.', 'm-pesa-payment-gateway' ), 401 );
 		}
 
 		return new \WP_REST_Response(
@@ -99,17 +99,17 @@ class WC_MPesa_REST_API {
 	public function refresh_token( \WP_REST_Request $request ): \WP_REST_Response {
 		$refresh_token = sanitize_text_field( (string) $request->get_param( 'refresh_token' ) );
 		if ( '' === $refresh_token ) {
-			return $this->error_response( 'unauthorized', __( 'Unauthorized.', 'wc-m-pesa' ), 401 );
+			return $this->error_response( 'unauthorized', __( 'Unauthorized.', 'm-pesa-payment-gateway' ), 401 );
 		}
 
 		$user_id = $this->validate_refresh_token( $refresh_token );
 		if ( $user_id <= 0 ) {
-			return $this->error_response( 'unauthorized', __( 'Unauthorized.', 'wc-m-pesa' ), 401 );
+			return $this->error_response( 'unauthorized', __( 'Unauthorized.', 'm-pesa-payment-gateway' ), 401 );
 		}
 
 		$user = get_user_by( 'id', $user_id );
 		if ( ! $user instanceof \WP_User ) {
-			return $this->error_response( 'unauthorized', __( 'Unauthorized.', 'wc-m-pesa' ), 401 );
+			return $this->error_response( 'unauthorized', __( 'Unauthorized.', 'm-pesa-payment-gateway' ), 401 );
 		}
 
 		return new \WP_REST_Response(
@@ -133,38 +133,38 @@ class WC_MPesa_REST_API {
 		$phone    = sanitize_text_field( (string) $request->get_param( 'phone' ) );
 
 		if ( $order_id <= 0 || '' === $phone ) {
-			return $this->error_response( 'invalid_request', __( 'Order ID and phone are required.', 'wc-m-pesa' ), 400 );
+			return $this->error_response( 'invalid_request', __( 'Order ID and phone are required.', 'm-pesa-payment-gateway' ), 400 );
 		}
 
 		$order = wc_get_order( $order_id );
 		if ( ! $order ) {
-			return $this->error_response( 'order_not_found', __( 'Order not found.', 'wc-m-pesa' ), 404 );
+			return $this->error_response( 'order_not_found', __( 'Order not found.', 'm-pesa-payment-gateway' ), 404 );
 		}
 
 		if ( ! $this->can_access_order( $order, $user_id ) ) {
-			return $this->error_response( 'forbidden', __( 'You cannot access this order.', 'wc-m-pesa' ), 403 );
+			return $this->error_response( 'forbidden', __( 'You cannot access this order.', 'm-pesa-payment-gateway' ), 403 );
 		}
 
 		$status = $order->get_status();
 		if ( in_array( $status, array( 'processing', 'completed' ), true ) ) {
-			return $this->error_response( 'already_paid', __( 'This order is already paid.', 'wc-m-pesa' ), 409 );
+			return $this->error_response( 'already_paid', __( 'This order is already paid.', 'm-pesa-payment-gateway' ), 409 );
 		}
 
 		$formatted_phone = WC_MPesa_STK_Push::format_phone( $phone );
 		if ( null === $formatted_phone ) {
-			return $this->error_response( 'invalid_phone', __( 'Invalid Safaricom phone number.', 'wc-m-pesa' ), 400 );
+			return $this->error_response( 'invalid_phone', __( 'Invalid Safaricom phone number.', 'm-pesa-payment-gateway' ), 400 );
 		}
 
 		$amount = (int) ceil( (float) $order->get_total() );
 		if ( $amount < 1 ) {
-			return $this->error_response( 'invalid_amount', __( 'M-Pesa cannot process orders with a zero total.', 'wc-m-pesa' ), 400 );
+			return $this->error_response( 'invalid_amount', __( 'M-Pesa cannot process orders with a zero total.', 'm-pesa-payment-gateway' ), 400 );
 		}
 
 		$settings = $this->get_gateway_settings();
 		$required = array( 'consumer_key', 'consumer_secret', 'shortcode', 'passkey' );
 		foreach ( $required as $required_key ) {
 			if ( empty( $settings[ $required_key ] ) ) {
-				return $this->error_response( 'gateway_not_configured', __( 'M-Pesa gateway is not fully configured.', 'wc-m-pesa' ), 500 );
+				return $this->error_response( 'gateway_not_configured', __( 'M-Pesa gateway is not fully configured.', 'm-pesa-payment-gateway' ), 500 );
 			}
 		}
 
@@ -180,7 +180,7 @@ class WC_MPesa_REST_API {
 
 		$order->update_status(
 			'on-hold',
-			__( 'Awaiting M-Pesa STK Push payment confirmation.', 'wc-m-pesa' )
+			__( 'Awaiting M-Pesa STK Push payment confirmation.', 'm-pesa-payment-gateway' )
 		);
 		$order->save();
 
@@ -212,10 +212,10 @@ class WC_MPesa_REST_API {
 		$order    = wc_get_order( $order_id );
 
 		if ( ! $order ) {
-			return $this->error_response( 'order_not_found', __( 'Order not found.', 'wc-m-pesa' ), 404 );
+			return $this->error_response( 'order_not_found', __( 'Order not found.', 'm-pesa-payment-gateway' ), 404 );
 		}
 		if ( ! $this->can_access_order( $order, $user_id ) ) {
-			return $this->error_response( 'forbidden', __( 'You cannot access this order.', 'wc-m-pesa' ), 403 );
+			return $this->error_response( 'forbidden', __( 'You cannot access this order.', 'm-pesa-payment-gateway' ), 403 );
 		}
 
 		return new \WP_REST_Response(
@@ -239,22 +239,22 @@ class WC_MPesa_REST_API {
 		$order    = wc_get_order( $order_id );
 
 		if ( ! $order ) {
-			return $this->error_response( 'order_not_found', __( 'Order not found.', 'wc-m-pesa' ), 404 );
+			return $this->error_response( 'order_not_found', __( 'Order not found.', 'm-pesa-payment-gateway' ), 404 );
 		}
 		if ( ! $this->can_access_order( $order, $user_id ) ) {
-			return $this->error_response( 'forbidden', __( 'You cannot access this order.', 'wc-m-pesa' ), 403 );
+			return $this->error_response( 'forbidden', __( 'You cannot access this order.', 'm-pesa-payment-gateway' ), 403 );
 		}
 
 		$checkout_request_id = (string) $order->get_meta( '_mpesa_checkout_request_id' );
 		if ( '' === $checkout_request_id ) {
-			return $this->error_response( 'missing_checkout_request_id', __( 'No M-Pesa CheckoutRequestID found for this order.', 'wc-m-pesa' ), 409 );
+			return $this->error_response( 'missing_checkout_request_id', __( 'No M-Pesa CheckoutRequestID found for this order.', 'm-pesa-payment-gateway' ), 409 );
 		}
 
 		$settings = $this->get_gateway_settings();
 		$required = array( 'consumer_key', 'consumer_secret', 'shortcode', 'passkey' );
 		foreach ( $required as $required_key ) {
 			if ( empty( $settings[ $required_key ] ) ) {
-				return $this->error_response( 'gateway_not_configured', __( 'M-Pesa gateway is not fully configured.', 'wc-m-pesa' ), 500 );
+				return $this->error_response( 'gateway_not_configured', __( 'M-Pesa gateway is not fully configured.', 'm-pesa-payment-gateway' ), 500 );
 			}
 		}
 
@@ -303,31 +303,31 @@ class WC_MPesa_REST_API {
 						'method'      => 'POST',
 						'protected'   => true,
 						'url'         => $base_url . 'payments/initiate',
-						'description' => __( 'Initiate an STK Push for an order.', 'wc-m-pesa' ),
+						'description' => __( 'Initiate an STK Push for an order.', 'm-pesa-payment-gateway' ),
 					),
 					'payment_status'   => array(
 						'method'      => 'GET',
 						'protected'   => true,
 						'url'         => $base_url . 'payments/{order_id}/status',
-						'description' => __( 'Get the mapped WooCommerce order/payment status.', 'wc-m-pesa' ),
+						'description' => __( 'Get the mapped WooCommerce order/payment status.', 'm-pesa-payment-gateway' ),
 					),
 					'payment_query'    => array(
 						'method'      => 'GET',
 						'protected'   => true,
 						'url'         => $base_url . 'payments/{order_id}/query',
-						'description' => __( 'Query Daraja using the stored CheckoutRequestID.', 'wc-m-pesa' ),
+						'description' => __( 'Query Daraja using the stored CheckoutRequestID.', 'm-pesa-payment-gateway' ),
 					),
 					'public_status'    => array(
 						'method'      => 'GET',
 						'protected'   => false,
 						'url'         => $base_url . 'status/{order_id}?key=<order_key>',
-						'description' => __( 'Public checkout polling endpoint.', 'wc-m-pesa' ),
+						'description' => __( 'Public checkout polling endpoint.', 'm-pesa-payment-gateway' ),
 					),
 					'callback'         => array(
 						'method'      => 'POST',
 						'protected'   => false,
 						'url'         => $base_url . 'callback?secret=<callback_secret>',
-						'description' => __( 'Daraja STK Push callback endpoint.', 'wc-m-pesa' ),
+						'description' => __( 'Daraja STK Push callback endpoint.', 'm-pesa-payment-gateway' ),
 					),
 				),
 			),
@@ -343,31 +343,31 @@ class WC_MPesa_REST_API {
 	 */
 	public function require_auth( \WP_REST_Request $request ) {
 		if ( ! is_ssl() ) {
-			return new \WP_Error( 'https_required', __( 'HTTPS is required for authenticated M-Pesa API requests.', 'wc-m-pesa' ), array( 'status' => 403 ) );
+			return new \WP_Error( 'https_required', __( 'HTTPS is required for authenticated M-Pesa API requests.', 'm-pesa-payment-gateway' ), array( 'status' => 403 ) );
 		}
 
 		$token = $this->get_bearer_token( $request );
 		if ( '' === $token ) {
-			return new \WP_Error( 'unauthorized', __( 'Unauthorized.', 'wc-m-pesa' ), array( 'status' => 401 ) );
+			return new \WP_Error( 'unauthorized', __( 'Unauthorized.', 'm-pesa-payment-gateway' ), array( 'status' => 401 ) );
 		}
 
 		$payload = $this->decode_jwt( $token );
 		if ( is_wp_error( $payload ) ) {
-			return new \WP_Error( 'unauthorized', __( 'Unauthorized.', 'wc-m-pesa' ), array( 'status' => 401 ) );
+			return new \WP_Error( 'unauthorized', __( 'Unauthorized.', 'm-pesa-payment-gateway' ), array( 'status' => 401 ) );
 		}
 
 		$user_id = isset( $payload['sub'] ) ? (int) $payload['sub'] : 0;
 		if ( $user_id <= 0 ) {
-			return new \WP_Error( 'unauthorized', __( 'Unauthorized.', 'wc-m-pesa' ), array( 'status' => 401 ) );
+			return new \WP_Error( 'unauthorized', __( 'Unauthorized.', 'm-pesa-payment-gateway' ), array( 'status' => 401 ) );
 		}
 
 		$user = get_userdata( $user_id );
 		if ( ! $user instanceof \WP_User ) {
-			return new \WP_Error( 'unauthorized', __( 'Unauthorized.', 'wc-m-pesa' ), array( 'status' => 401 ) );
+			return new \WP_Error( 'unauthorized', __( 'Unauthorized.', 'm-pesa-payment-gateway' ), array( 'status' => 401 ) );
 		}
 
 		if ( class_exists( 'WC_UAC_User_Meta' ) && 'suspended' === WC_UAC_User_Meta::get_status( $user_id ) ) {
-			return new \WP_Error( 'unauthorized', __( 'Unauthorized.', 'wc-m-pesa' ), array( 'status' => 401 ) );
+			return new \WP_Error( 'unauthorized', __( 'Unauthorized.', 'm-pesa-payment-gateway' ), array( 'status' => 401 ) );
 		}
 
 		wp_set_current_user( $user_id );

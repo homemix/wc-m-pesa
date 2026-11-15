@@ -26,7 +26,7 @@ class WC_MPesa_Request {
 		if ( false === $json ) {
 			return new \WP_Error(
 				'wc_mpesa_encode_error',
-				__( 'Failed to JSON-encode the M-Pesa request body. Ensure all values are UTF-8.', 'wc-m-pesa' )
+				__( 'Failed to JSON-encode the M-Pesa request body. Ensure all values are UTF-8.', 'm-pesa-payment-gateway' )
 			);
 		}
 
@@ -81,7 +81,7 @@ class WC_MPesa_Request {
 		if ( 0 === $status_code ) {
 			return new \WP_Error(
 				'wc_mpesa_bad_response',
-				__( 'M-Pesa API returned an unreadable response (no HTTP status code).', 'wc-m-pesa' ),
+				__( 'M-Pesa API returned an unreadable response (no HTTP status code).', 'm-pesa-payment-gateway' ),
 				array( 'body' => $body )
 			);
 		}
@@ -91,14 +91,14 @@ class WC_MPesa_Request {
 		if ( json_last_error() !== JSON_ERROR_NONE ) {
 			return new \WP_Error(
 				'wc_mpesa_invalid_json',
-				__( 'M-Pesa API returned an invalid JSON response.', 'wc-m-pesa' ),
+				__( 'M-Pesa API returned an invalid JSON response.', 'm-pesa-payment-gateway' ),
 				array( 'status' => $status_code, 'body' => $body )
 			);
 		}
 
 		if ( $status_code >= 400 ) {
 			$error_message = sanitize_text_field(
-				$decoded['errorMessage'] ?? $decoded['ResultDesc'] ?? __( 'Unknown M-Pesa API error.', 'wc-m-pesa' )
+				$decoded['errorMessage'] ?? $decoded['ResultDesc'] ?? __( 'Unknown M-Pesa API error.', 'm-pesa-payment-gateway' )
 			);
 			return new \WP_Error(
 				'wc_mpesa_api_error',

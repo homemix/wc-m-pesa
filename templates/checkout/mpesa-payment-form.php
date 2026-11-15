@@ -16,14 +16,14 @@ if ( is_a( WC()->checkout(), 'WC_Checkout' ) ) {
 ?>
 <div class="wc-mpesa-phone-field">
 	<label for="mpesa_phone">
-		<?php esc_html_e( 'M-Pesa Phone Number', 'wc-m-pesa' ); ?>
-		<abbr class="required" title="<?php esc_attr_e( 'required', 'wc-m-pesa' ); ?>">*</abbr>
+		<?php esc_html_e( 'M-Pesa Phone Number', 'm-pesa-payment-gateway' ); ?>
+		<abbr class="required" title="<?php esc_attr_e( 'required', 'm-pesa-payment-gateway' ); ?>">*</abbr>
 	</label>
 	<input
 		id="mpesa_phone"
 		name="mpesa_phone"
 		type="tel"
-		placeholder="<?php esc_attr_e( '0712 345 678', 'wc-m-pesa' ); ?>"
+		placeholder="<?php esc_attr_e( '0712 345 678', 'm-pesa-payment-gateway' ); ?>"
 		autocomplete="tel"
 		required
 		maxlength="15"
@@ -32,6 +32,6 @@ if ( is_a( WC()->checkout(), 'WC_Checkout' ) ) {
 		value="<?php echo esc_attr( $billing_phone ); ?>"
 	/>
 	<small id="mpesa-phone-hint">
-		<?php esc_html_e( 'Enter your Safaricom M-Pesa number (e.g. 0712 345 678). Only Safaricom numbers can receive STK Push prompts.', 'wc-m-pesa' ); ?>
+		<?php esc_html_e( 'Enter your Safaricom M-Pesa number (e.g. 0712 345 678). Only Safaricom numbers can receive STK Push prompts.', 'm-pesa-payment-gateway' ); ?>
 	</small>
 </div>

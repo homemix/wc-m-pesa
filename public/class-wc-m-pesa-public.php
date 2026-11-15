@@ -75,10 +75,10 @@ class WC_MPesa_Public {
 				'pollInterval'   => 3000,
 				'maxAttempts'    => 20,
 				'i18n'           => array(
-					'pending'    => __( 'Waiting for M-Pesa payment confirmation…', 'wc-m-pesa' ),
-					'success'    => __( 'Payment confirmed! Redirecting…', 'wc-m-pesa' ),
-					'failed'     => __( 'Payment was not completed. Please try again.', 'wc-m-pesa' ),
-					'timeout'    => __( 'We could not confirm your payment yet. Please check your M-Pesa messages.', 'wc-m-pesa' ),
+					'pending'    => __( 'Waiting for M-Pesa payment confirmation…', 'm-pesa-payment-gateway' ),
+					'success'    => __( 'Payment confirmed! Redirecting…', 'm-pesa-payment-gateway' ),
+					'failed'     => __( 'Payment was not completed. Please try again.', 'm-pesa-payment-gateway' ),
+					'timeout'    => __( 'We could not confirm your payment yet. Please check your M-Pesa messages.', 'm-pesa-payment-gateway' ),
 				),
 			)
 		);

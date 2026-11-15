@@ -99,7 +99,7 @@ class WC_MPesa_Callback {
 					'on-hold',
 					sprintf(
 						/* translators: 1: paid amount, 2: expected amount */
-						__( '[M-Pesa] Payment amount mismatch. Received KES %.2f, expected KES %.2f. Manual review required.', 'wc-m-pesa' ),
+						__( '[M-Pesa] Payment amount mismatch. Received KES %1$.2f, expected KES %2$.2f. Manual review required.', 'm-pesa-payment-gateway' ),
 						$paid_amount,
 						$order_total
 					)
@@ -122,7 +122,7 @@ class WC_MPesa_Callback {
 			if ( '' === $receipt ) {
 				$order->update_status(
 					'on-hold',
-					__( '[M-Pesa] Success callback missing receipt number. Manual review required.', 'wc-m-pesa' )
+					__( '[M-Pesa] Success callback missing receipt number. Manual review required.', 'm-pesa-payment-gateway' )
 				);
 				$order->save();
 				wc_get_logger()->warning(
@@ -142,7 +142,7 @@ class WC_MPesa_Callback {
 			$order->add_order_note(
 				sprintf(
 					/* translators: %s: M-Pesa receipt number */
-					__( 'M-Pesa payment completed. Receipt: %s', 'wc-m-pesa' ),
+					__( 'M-Pesa payment completed. Receipt: %s', 'm-pesa-payment-gateway' ),
 					$receipt
 				)
 			);
@@ -195,15 +195,15 @@ class WC_MPesa_Callback {
 	 */
 	private function friendly_result_message( int $code, string $raw_desc ): string {
 		$map = array(
-			1    => __( 'Insufficient funds in the M-Pesa account.', 'wc-m-pesa' ),
-			17   => __( 'M-Pesa system internal error. Please try again.', 'wc-m-pesa' ),
-			1001 => __( 'Unable to lock subscriber — please try again shortly.', 'wc-m-pesa' ),
-			1032 => __( 'Payment request was cancelled by the user.', 'wc-m-pesa' ),
-			1037 => __( 'Request timed out — the customer could not be reached on M-Pesa.', 'wc-m-pesa' ),
-			2001 => __( 'Wrong M-Pesa PIN entered. Payment declined.', 'wc-m-pesa' ),
+			1    => __( 'Insufficient funds in the M-Pesa account.', 'm-pesa-payment-gateway' ),
+			17   => __( 'M-Pesa system internal error. Please try again.', 'm-pesa-payment-gateway' ),
+			1001 => __( 'Unable to lock subscriber — please try again shortly.', 'm-pesa-payment-gateway' ),
+			1032 => __( 'Payment request was cancelled by the user.', 'm-pesa-payment-gateway' ),
+			1037 => __( 'Request timed out — the customer could not be reached on M-Pesa.', 'm-pesa-payment-gateway' ),
+			2001 => __( 'Wrong M-Pesa PIN entered. Payment declined.', 'm-pesa-payment-gateway' ),
 		);
 
-		return $map[ $code ] ?? ( $raw_desc ?: __( 'Payment failed.', 'wc-m-pesa' ) );
+		return $map[ $code ] ?? ( $raw_desc ?: __( 'Payment failed.', 'm-pesa-payment-gateway' ) );
 	}
 
 	/**

@@ -60,7 +60,7 @@ class WC_MPesa_STK_Push {
 			if ( '' === $checkout_request_id || '' === $merchant_request_id ) {
 				return new \WP_Error(
 					'wc_mpesa_invalid_stk_response',
-					__( 'M-Pesa STK Push response was missing required request IDs.', 'wc-m-pesa' ),
+					__( 'M-Pesa STK Push response was missing required request IDs.', 'm-pesa-payment-gateway' ),
 					is_array( $response ) ? $response : array()
 				);
 			}

@@ -18,7 +18,7 @@
  * Requires PHP:      7.4
  * Author:            Kennedy Wambua
  * Author URI:        https://github.com/homemix
- * Text Domain:       wc-m-pesa
+ * Text Domain:       m-pesa-payment-gateway
  * Domain Path:       /languages
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -58,7 +58,7 @@ function wc_mpesa_missing_wc_notice(): void {
 	echo '<div class="error"><p>'
 		. sprintf(
 			/* translators: %s: WooCommerce plugin URL */
-			esc_html__( 'WooCommerce M-Pesa requires WooCommerce to be installed and active. You can download %s here.', 'wc-m-pesa' ),
+			esc_html__( 'WooCommerce M-Pesa requires WooCommerce to be installed and active. You can download %s here.', 'm-pesa-payment-gateway' ),
 			'<a href="https://wordpress.org/plugins/woocommerce/" target="_blank">WooCommerce</a>'
 		)
 		. '</p></div>';

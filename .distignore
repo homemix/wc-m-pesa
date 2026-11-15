@@ -1,3 +1,9 @@
-.idea/
-.phpunit.result.cache
+.*
+/tests/
+/vendor/
+/composer.json
+/composer.lock
+/composer.phar
+/phpunit.xml
+/phpunit.xml.dist
 /wc_test_output.txt

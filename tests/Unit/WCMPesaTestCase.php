@@ -51,7 +51,10 @@ abstract class WCMPesaTestCase extends TestCase {
 		Functions\when( 'is_wp_error' )->alias( fn( $v ) => $v instanceof \WP_Error );
 
 		// Sanitization — deterministic, never needs asserting.
-		Functions\when( 'sanitize_text_field' )->alias( fn( $s ) => trim( strip_tags( (string) $s ) ) );
+		Functions\when( 'wp_strip_all_tags' )->alias(
+			fn( $text ) => trim( preg_replace( '/<[^>]+>/', '', (string) $text ) )
+		);
+		Functions\when( 'sanitize_text_field' )->alias( fn( $s ) => trim( wp_strip_all_tags( (string) $s ) ) );
 		Functions\when( 'is_ssl' )->justReturn( true );
 	}
 }

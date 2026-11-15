@@ -23,7 +23,7 @@ Accept M-Pesa payments in your WooCommerce store using Safaricom Daraja STK Push
 
 ## Installation
 
-1. Zip the `wc-m-pesa` folder so the archive contains `wc-m-pesa/` as its top-level folder. In WordPress, go to **Plugins > Add New Plugin > Upload Plugin**, select the ZIP file, and click **Install Now**. Alternatively, upload the extracted `wc-m-pesa` folder to `/wp-content/plugins/`.
+1. Prepare the upload ZIP with WP-CLI's `dist-archive` command (install it with `wp package install wp-cli/dist-archive-command`) so the exclusions in `.distignore` are applied; do not zip the working directory directly. The archive should contain `wc-m-pesa/` as its top-level folder. In WordPress, go to **Plugins > Add New Plugin > Upload Plugin**, select the ZIP file, and click **Install Now**. Alternatively, upload the extracted `wc-m-pesa` folder to `/wp-content/plugins/`.
 2. Activate **M-Pesa Payment Gateway** under **Plugins > Installed Plugins**.
 3. Go to **WooCommerce > Settings > Payments** and open **M-Pesa (STK Push)**.
 4. Enter your Consumer Key, Consumer Secret, Shortcode, and Lipa Na M-Pesa Passkey.

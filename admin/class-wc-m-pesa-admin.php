@@ -78,9 +78,9 @@ class WC_MPesa_Admin {
 				echo '<div class="notice notice-warning"><p>'
 					. sprintf(
 						/* translators: %s: settings URL */
-						esc_html__( 'WooCommerce M-Pesa is enabled but not fully configured. Please complete the %s.', 'wc-m-pesa' ),
+						esc_html__( 'WooCommerce M-Pesa is enabled but not fully configured. Please complete the %s.', 'm-pesa-payment-gateway' ),
 						'<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=wc_mpesa' ) ) . '">'
-						. esc_html__( 'gateway settings', 'wc-m-pesa' )
+						. esc_html__( 'gateway settings', 'm-pesa-payment-gateway' )
 						. '</a>'
 					)
 					. '</p></div>';
@@ -112,7 +112,7 @@ class WC_MPesa_Admin {
 		$settings_link = sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=wc_mpesa' ) ),
-			esc_html__( 'Settings', 'wc-m-pesa' )
+			esc_html__( 'Settings', 'm-pesa-payment-gateway' )
 		);
 
 		array_unshift( $links, $settings_link );

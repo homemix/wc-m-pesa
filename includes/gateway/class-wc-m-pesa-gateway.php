@@ -29,8 +29,8 @@ class WC_MPesa_Gateway extends \WC_Payment_Gateway {
 			file_exists( $icon_file ) ? WC_MPESA_PLUGIN_URL . 'public/images/mpesa-logo.svg' : ''
 		);
 		$this->has_fields         = true;
-		$this->method_title       = __( 'M-Pesa (STK Push)', 'wc-m-pesa' );
-		$this->method_description = __( 'Accept payments via Safaricom M-Pesa Lipa Na M-Pesa Online (STK Push). Customers receive a USSD prompt on their phone to complete payment.', 'wc-m-pesa' );
+		$this->method_title       = __( 'M-Pesa (STK Push)', 'm-pesa-payment-gateway' );
+		$this->method_description = __( 'Accept payments via Safaricom M-Pesa Lipa Na M-Pesa Online (STK Push). Customers receive a USSD prompt on their phone to complete payment.', 'm-pesa-payment-gateway' );
 		$this->supports           = array( 'products' );
 
 		$this->init_form_fields();
@@ -88,86 +88,86 @@ class WC_MPesa_Gateway extends \WC_Payment_Gateway {
 	public function init_form_fields(): void {
 		$this->form_fields = array(
 			'enabled'                  => array(
-				'title'   => __( 'Enable / Disable', 'wc-m-pesa' ),
+				'title'   => __( 'Enable / Disable', 'm-pesa-payment-gateway' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable M-Pesa Payment Gateway', 'wc-m-pesa' ),
+				'label'   => __( 'Enable M-Pesa Payment Gateway', 'm-pesa-payment-gateway' ),
 				'default' => 'no',
 			),
 			'title'                    => array(
-				'title'       => __( 'Title', 'wc-m-pesa' ),
+				'title'       => __( 'Title', 'm-pesa-payment-gateway' ),
 				'type'        => 'text',
-				'description' => __( 'Payment method title shown to the customer during checkout.', 'wc-m-pesa' ),
-				'default'     => __( 'M-Pesa', 'wc-m-pesa' ),
+				'description' => __( 'Payment method title shown to the customer during checkout.', 'm-pesa-payment-gateway' ),
+				'default'     => __( 'M-Pesa', 'm-pesa-payment-gateway' ),
 				'desc_tip'    => true,
 			),
 			'description'              => array(
-				'title'       => __( 'Description', 'wc-m-pesa' ),
+				'title'       => __( 'Description', 'm-pesa-payment-gateway' ),
 				'type'        => 'textarea',
-				'description' => __( 'Payment method description shown to the customer during checkout.', 'wc-m-pesa' ),
-				'default'     => __( 'Pay via M-Pesa. You will receive an STK Push prompt on your phone.', 'wc-m-pesa' ),
+				'description' => __( 'Payment method description shown to the customer during checkout.', 'm-pesa-payment-gateway' ),
+				'default'     => __( 'Pay via M-Pesa. You will receive an STK Push prompt on your phone.', 'm-pesa-payment-gateway' ),
 				'desc_tip'    => true,
 			),
 			'environment'              => array(
-				'title'       => __( 'Environment', 'wc-m-pesa' ),
+				'title'       => __( 'Environment', 'm-pesa-payment-gateway' ),
 				'type'        => 'select',
-				'description' => __( 'Use Sandbox for testing; switch to Production before going live.', 'wc-m-pesa' ),
+				'description' => __( 'Use Sandbox for testing; switch to Production before going live.', 'm-pesa-payment-gateway' ),
 				'default'     => 'sandbox',
 				'desc_tip'    => true,
 				'options'     => array(
-					'sandbox'    => __( 'Sandbox (Testing)', 'wc-m-pesa' ),
-					'production' => __( 'Production (Live)', 'wc-m-pesa' ),
+					'sandbox'    => __( 'Sandbox (Testing)', 'm-pesa-payment-gateway' ),
+					'production' => __( 'Production (Live)', 'm-pesa-payment-gateway' ),
 				),
 			),
 			'consumer_key'             => array(
-				'title'       => __( 'Consumer Key', 'wc-m-pesa' ),
+				'title'       => __( 'Consumer Key', 'm-pesa-payment-gateway' ),
 				'type'        => 'text',
-				'description' => __( 'Your Daraja app Consumer Key from developer.safaricom.co.ke.', 'wc-m-pesa' ),
+				'description' => __( 'Your Daraja app Consumer Key from developer.safaricom.co.ke.', 'm-pesa-payment-gateway' ),
 				'default'     => '',
 				'desc_tip'    => true,
 			),
 			'consumer_secret'          => array(
-				'title'       => __( 'Consumer Secret', 'wc-m-pesa' ),
+				'title'       => __( 'Consumer Secret', 'm-pesa-payment-gateway' ),
 				'type'        => 'password',
-				'description' => __( 'Your Daraja app Consumer Secret from developer.safaricom.co.ke.', 'wc-m-pesa' ),
+				'description' => __( 'Your Daraja app Consumer Secret from developer.safaricom.co.ke.', 'm-pesa-payment-gateway' ),
 				'default'     => '',
 				'desc_tip'    => true,
 			),
 			'shortcode'                => array(
-				'title'       => __( 'Business Shortcode', 'wc-m-pesa' ),
+				'title'       => __( 'Business Shortcode', 'm-pesa-payment-gateway' ),
 				'type'        => 'text',
-				'description' => __( 'Your M-Pesa Paybill or Till number.', 'wc-m-pesa' ),
+				'description' => __( 'Your M-Pesa Paybill or Till number.', 'm-pesa-payment-gateway' ),
 				'default'     => '',
 				'desc_tip'    => true,
 			),
 			'passkey'                  => array(
-				'title'       => __( 'Lipa Na M-Pesa Passkey', 'wc-m-pesa' ),
+				'title'       => __( 'Lipa Na M-Pesa Passkey', 'm-pesa-payment-gateway' ),
 				'type'        => 'password',
-				'description' => __( 'Lipa Na M-Pesa Online Passkey provided by Safaricom.', 'wc-m-pesa' ),
+				'description' => __( 'Lipa Na M-Pesa Online Passkey provided by Safaricom.', 'm-pesa-payment-gateway' ),
 				'default'     => '',
 				'desc_tip'    => true,
 			),
 			'transaction_type'         => array(
-				'title'       => __( 'Transaction Type', 'wc-m-pesa' ),
+				'title'       => __( 'Transaction Type', 'm-pesa-payment-gateway' ),
 				'type'        => 'select',
-				'description' => __( 'Use CustomerPayBillOnline for Paybill, CustomerBuyGoodsOnline for Till numbers.', 'wc-m-pesa' ),
+				'description' => __( 'Use CustomerPayBillOnline for Paybill, CustomerBuyGoodsOnline for Till numbers.', 'm-pesa-payment-gateway' ),
 				'default'     => 'CustomerPayBillOnline',
 				'desc_tip'    => true,
 				'options'     => array(
-					'CustomerPayBillOnline'   => __( 'CustomerPayBillOnline (Paybill)', 'wc-m-pesa' ),
-					'CustomerBuyGoodsOnline'  => __( 'CustomerBuyGoodsOnline (Till)', 'wc-m-pesa' ),
+					'CustomerPayBillOnline'   => __( 'CustomerPayBillOnline (Paybill)', 'm-pesa-payment-gateway' ),
+					'CustomerBuyGoodsOnline'  => __( 'CustomerBuyGoodsOnline (Till)', 'm-pesa-payment-gateway' ),
 				),
 			),
 			'account_reference'        => array(
-				'title'       => __( 'Account Reference', 'wc-m-pesa' ),
+				'title'       => __( 'Account Reference', 'm-pesa-payment-gateway' ),
 				'type'        => 'text',
-				'description' => __( 'Reference shown on the customer\'s M-Pesa statement (max 12 characters). Leave blank to use the order number.', 'wc-m-pesa' ),
+				'description' => __( 'Reference shown on the customer\'s M-Pesa statement (max 12 characters). Leave blank to use the order number.', 'm-pesa-payment-gateway' ),
 				'default'     => get_bloginfo( 'name' ),
 				'desc_tip'    => true,
 			),
 			'transaction_description'  => array(
-				'title'       => __( 'Transaction Description', 'wc-m-pesa' ),
+				'title'       => __( 'Transaction Description', 'm-pesa-payment-gateway' ),
 				'type'        => 'text',
-				'description' => __( 'Short description sent to Daraja (max 13 characters).', 'wc-m-pesa' ),
+				'description' => __( 'Short description sent to Daraja (max 13 characters).', 'm-pesa-payment-gateway' ),
 				'default'     => 'WooCommerce',
 				'desc_tip'    => true,
 			),
@@ -203,13 +203,13 @@ class WC_MPesa_Gateway extends \WC_Payment_Gateway {
 		$phone = isset( $_POST['mpesa_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['mpesa_phone'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification
 
 		if ( empty( $phone ) ) {
-			wc_add_notice( __( 'Please enter your M-Pesa phone number.', 'wc-m-pesa' ), 'error' );
+			wc_add_notice( __( 'Please enter your M-Pesa phone number.', 'm-pesa-payment-gateway' ), 'error' );
 			return false;
 		}
 
 		$formatted = WC_MPesa_STK_Push::format_phone( $phone );
 		if ( null === $formatted ) {
-			wc_add_notice( __( 'Please enter a valid Safaricom phone number (e.g. 0712345678 or 254712345678).', 'wc-m-pesa' ), 'error' );
+			wc_add_notice( __( 'Please enter a valid Safaricom phone number (e.g. 0712345678 or 254712345678).', 'm-pesa-payment-gateway' ), 'error' );
 			return false;
 		}
 
@@ -231,7 +231,7 @@ class WC_MPesa_Gateway extends \WC_Payment_Gateway {
 	public function process_payment( $order_id ): ?array {
 		$order = wc_get_order( $order_id );
 		if ( ! $order ) {
-			wc_add_notice( __( 'Order not found.', 'wc-m-pesa' ), 'error' );
+			wc_add_notice( __( 'Order not found.', 'm-pesa-payment-gateway' ), 'error' );
 			return array( 'result' => 'fail' );
 		}
 
@@ -239,14 +239,14 @@ class WC_MPesa_Gateway extends \WC_Payment_Gateway {
 		$phone     = WC_MPesa_STK_Push::format_phone( $raw_phone );
 
 		if ( null === $phone ) {
-			wc_add_notice( __( 'Invalid M-Pesa phone number.', 'wc-m-pesa' ), 'error' );
+			wc_add_notice( __( 'Invalid M-Pesa phone number.', 'm-pesa-payment-gateway' ), 'error' );
 			return array( 'result' => 'fail' );
 		}
 
 		// Guard against zero-value orders (free products / full-coupon orders).
 		$amount = (int) ceil( (float) $order->get_total() );
 		if ( $amount < 1 ) {
-			wc_add_notice( __( 'M-Pesa cannot process orders with a zero total. Please use another payment method.', 'wc-m-pesa' ), 'error' );
+			wc_add_notice( __( 'M-Pesa cannot process orders with a zero total. Please use another payment method.', 'm-pesa-payment-gateway' ), 'error' );
 			return array( 'result' => 'fail' );
 		}
 
@@ -256,7 +256,7 @@ class WC_MPesa_Gateway extends \WC_Payment_Gateway {
 			wc_add_notice(
 				sprintf(
 					/* translators: %s: error message */
-					__( 'M-Pesa payment initiation failed: %s', 'wc-m-pesa' ),
+					__( 'M-Pesa payment initiation failed: %s', 'm-pesa-payment-gateway' ),
 					$response->get_error_message()
 				),
 				'error'
@@ -267,7 +267,7 @@ class WC_MPesa_Gateway extends \WC_Payment_Gateway {
 
 		$order->update_status(
 			'on-hold',
-			__( 'Awaiting M-Pesa STK Push payment confirmation.', 'wc-m-pesa' )
+			__( 'Awaiting M-Pesa STK Push payment confirmation.', 'm-pesa-payment-gateway' )
 		);
 
 		// Empty the cart only after a successful STK Push initiation.

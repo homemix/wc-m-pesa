@@ -66,7 +66,7 @@ class WC_MPesa_Auth {
 		if ( empty( $this->consumer_key ) || empty( $this->consumer_secret ) ) {
 			return new \WP_Error(
 				'wc_mpesa_missing_credentials',
-				__( 'M-Pesa Consumer Key and Consumer Secret must be configured in the gateway settings.', 'wc-m-pesa' )
+				__( 'M-Pesa Consumer Key and Consumer Secret must be configured in the gateway settings.', 'm-pesa-payment-gateway' )
 			);
 		}
 
@@ -87,7 +87,7 @@ class WC_MPesa_Auth {
 		if ( '' === $token ) {
 			return new \WP_Error(
 				'wc_mpesa_auth_failed',
-				__( 'M-Pesa authentication failed: no access_token in response.', 'wc-m-pesa' ),
+				__( 'M-Pesa authentication failed: no access_token in response.', 'm-pesa-payment-gateway' ),
 				$response
 			);
 		}
