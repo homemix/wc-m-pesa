@@ -1,6 +1,6 @@
 <?php
 /**
- * WooCommerce M-Pesa Payment Gateway
+ * M-Pesa Payment Gateway
  *
  * Integrates Safaricom Daraja API (STK Push) as a WooCommerce payment gateway.
  *
@@ -10,7 +10,7 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       WooCommerce M-Pesa Payment Gateway
+ * Plugin Name:       M-Pesa Payment Gateway
  * Plugin URI:        https://github.com/homemix/wc-m-pesa
  * Description:       Accept M-Pesa payments in your WooCommerce store via Safaricom Daraja STK Push (Lipa Na M-Pesa Online).
  * Version:           1.0.0

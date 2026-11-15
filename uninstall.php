@@ -1,6 +1,6 @@
 <?php
 /**
- * Uninstall WooCommerce M-Pesa Payment Gateway.
+ * Uninstall M-Pesa Payment Gateway.
  *
  * @package WC_MPesa
  */

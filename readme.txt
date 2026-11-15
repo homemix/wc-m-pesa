@@ -1,4 +1,4 @@
-=== WooCommerce M-Pesa Payment Gateway ===
+=== M-Pesa Payment Gateway ===
 Contributors:      kennedywambua
 Tags:              woocommerce, mpesa, payment, safaricom, kenya, daraja, stk push
 Requires at least: 5.8
@@ -12,7 +12,7 @@ Accept M-Pesa payments in your WooCommerce store via Safaricom Daraja STK Push (
 
 == Description ==
 
-**WooCommerce M-Pesa Payment Gateway** integrates Safaricom's Daraja API into WooCommerce so Kenyan merchants can accept M-Pesa payments directly from their online store.
+**M-Pesa Payment Gateway** integrates Safaricom's Daraja API into WooCommerce so Kenyan merchants can accept M-Pesa payments directly from their online store.
 
 = How it works =
 1. Customer selects "M-Pesa" at checkout and enters their Safaricom phone number.

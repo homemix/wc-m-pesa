@@ -1,6 +1,6 @@
 {
     "name": "homemix/wc-m-pesa",
-    "description": "WooCommerce M-Pesa Payment Gateway",
+    "description": "M-Pesa Payment Gateway",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "require": {

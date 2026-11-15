@@ -1,6 +1,6 @@
 <?php
 /**
- * WooCommerce M-Pesa Payment Gateway.
+ * M-Pesa Payment Gateway.
  *
  * Extends WC_Payment_Gateway to add M-Pesa STK Push as a checkout payment option.
  *
@@ -90,7 +90,7 @@ class WC_MPesa_Gateway extends \WC_Payment_Gateway {
 			'enabled'                  => array(
 				'title'   => __( 'Enable / Disable', 'wc-m-pesa' ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Enable WooCommerce M-Pesa Payment Gateway', 'wc-m-pesa' ),
+				'label'   => __( 'Enable M-Pesa Payment Gateway', 'wc-m-pesa' ),
 				'default' => 'no',
 			),
 			'title'                    => array(
